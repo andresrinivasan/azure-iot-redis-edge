@@ -1,18 +1,25 @@
-##FROM ubuntu:xenial
 FROM redis:5.0-rc
 
-WORKDIR /app
+## What follows is only what is required to enable the Edge Runtime or 
+## override what was copied from the Redis image
+
+WORKDIR /module
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends libcurl4-openssl-dev python-pip libboost-python-dev && \
     rm -rf /var/lib/apt/lists/* 
 
-COPY requirements.txt ./
-RUN pip install -r requirements.txt
+COPY requirements.txt /module
+RUN pip install -r /module/requirements.txt
 
-COPY . .
+COPY edge-hooks.py /module
 
 RUN useradd -ms /bin/bash moduleuser
 USER moduleuser
 
-##CMD [ "python", "-u", "./main.py" ]
+WORKDIR /data
+
+COPY module-entrypoint.sh /usr/local/bin/
+ENTRYPOINT ["module-entrypoint.sh"]
+
+CMD ["redis-server"]
