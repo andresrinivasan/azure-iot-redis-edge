@@ -67,8 +67,8 @@
       "properties.desired": {
         "schemaVersion": "1.0",
         "routes": {
-          "RedisTestingToIoTHub": "FROM /messages/modules/RedisTesting/outputs/* INTO $upstream",
-          "sensorToRedisTesting": "FROM /messages/modules/tempSensor/outputs/temperatureOutput INTO BrokeredEndpoint(\"/modules/RedisTesting/inputs/input1\")"
+          "RedisEdgeToHub": "FROM /messages/modules/RedisEdge/outputs/* INTO $upstream",
+          "sensorToTestapp": "FROM /messages/modules/tempSensor/outputs/temperatureOutput INTO BrokeredEndpoint(\"/modules/TestApp/inputs/input1\")"
         },
         "storeAndForwardConfiguration": {
           "timeToLiveSecs": 7200
