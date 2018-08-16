@@ -25,7 +25,7 @@ PROTOCOL = IoTHubTransportProvider.MQTT
 # Callback received when the message that we're forwarding is processed.
 def send_confirmation_callback(message, result, user_context):
     global SEND_CALLBACKS
-    print ( "Confirmation[%d] received for message with result = %s" % (user_context, result) )
+    print ( "RedisEdge: Confirmation[%d] received for message with result = %s" % (user_context, result) )
     map_properties = message.properties()
     key_value_pair = map_properties.get_internals()
     print ( "    Properties: %s" % key_value_pair )
@@ -40,7 +40,7 @@ def receive_message_callback(message, hubManager):
     global RECEIVE_CALLBACKS
     message_buffer = message.get_bytearray()
     size = len(message_buffer)
-    print ( "    Data: <<<%s>>> & Size=%d" % (message_buffer[:size].decode('utf-8'), size) )
+    print ( "RedisEdge: Data: <<<%s>>> & Size=%d" % (message_buffer[:size].decode('utf-8'), size) )
     map_properties = message.properties()
     key_value_pair = map_properties.get_internals()
     print ( "    Properties: %s" % key_value_pair )
@@ -74,12 +74,12 @@ class HubManager(object):
 def main(protocol):
     try:
         print ( "\nPython %s\n" % sys.version )
-        print ( "IoT Hub Client for Python" )
+        print ( "I am RedisEdge" )
 
         hub_manager = HubManager(protocol)
 
-        print ( "Starting the IoT Hub Python sample using protocol %s..." % hub_manager.client_protocol )
-        print ( "The sample is now waiting for messages and will indefinitely.  Press Ctrl-C to exit. ")
+        print ( "Starting with protocol %s..." % hub_manager.client_protocol )
+        print ( "Waiting for messages...")
 
         while True:
             time.sleep(1)

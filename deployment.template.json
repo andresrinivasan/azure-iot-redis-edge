@@ -40,13 +40,23 @@
               "createOptions": ""
             }
           },
-          "RedisTesting": {
+          "RedisEdge": {
             "version": "1.0",
             "type": "docker",
             "status": "running",
             "restartPolicy": "always",
             "settings": {
-              "image": "${MODULES.RedisTesting.amd64}",
+              "image": "${MODULES.RedisEdge.amd64}",
+              "createOptions": ""
+            }
+          },
+          "TestApp": {
+            "version": "1.0",
+            "type": "docker",
+            "status": "running",
+            "restartPolicy": "always",
+            "settings": {
+              "image": "${MODULES.TestApp.amd64}",
               "createOptions": ""
             }
           }
