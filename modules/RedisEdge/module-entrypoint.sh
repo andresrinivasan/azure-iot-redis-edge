@@ -2,13 +2,11 @@
 
 ## From https://github.com/docker-library/redis/blob/master/5.0-rc
 
-echo '$@='"$@"
-
 set -ex
 
 ## Added: Enable the hooks for the Edge runtime
 ## XXX Should this write to a log file?
-python -u /module/edge-hooks.py &
+/module/edge-hooks.js &
 
 # first arg is `-f` or `--some-option`
 # or first arg is `something.conf`

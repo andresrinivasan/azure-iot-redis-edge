@@ -1,0 +1,10 @@
+{
+    "name": "redisedge",
+    "description": "RedisEdge for Azure IoT Edge",
+    "version": "0.0.1",
+    "dependencies": {
+        "azure-iot-device": "1.7.3",
+        "azure-iot-device-mqtt": "1.7.3",
+        "bluebird": "3.5.0"
+    }
+}

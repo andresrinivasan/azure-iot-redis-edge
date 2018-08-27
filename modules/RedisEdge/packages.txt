@@ -1,0 +1,6 @@
+gnupg 
+git 
+cmake 
+build-essential 
+wget
+ca-certificates
