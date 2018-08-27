@@ -47,9 +47,12 @@ Client.fromEnvironment(Transport, (err, client) => {
       throw e;
     });
 
+    process.stdout.write(`client = ${JSON.stringify(client)}\n`);
+
     // connect to the Edge instance
     client.open((e) => {
       if (e) {
+        process.stdout.write(`err = ${JSON.stringify(err)}\n`);
         throw e;
       } else {
         process.stdout.write('IoT Hub module client initialized\n');
