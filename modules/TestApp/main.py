@@ -65,8 +65,7 @@ def module_twin_callback(update_state, payload, user_context):
         if UPDATE_REDIS == "yes":
             #write values to Redis DB
             r = redis.Redis(host='redisedge', port=6379)
-            #r.set('foo', 'bar') //commenting out for testing of streams
-
+            
             #test redis streams
             xaddstream = 'XADD frameStream * '
             xaddkey = 'frame' #could combine with above - leaving as is for now

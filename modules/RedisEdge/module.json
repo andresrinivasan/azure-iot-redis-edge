@@ -2,7 +2,7 @@
     "$schema-version": "0.0.1",
     "description": "",
     "image": {
-        "repository": "myiotregistery.azurecr.io/redis-edge",
+        "repository": "$CONTAINER_REGISTRY_ADDRESS/redisedge",
         "tag": {
             "version": "0.8",
             "platforms": {
