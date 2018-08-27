@@ -55,7 +55,7 @@ def receive_message_callback(message, hubManager):
     hubManager.forward_event_to_output("output1", message, 0)
     return IoTHubMessageDispositionResult.ACCEPTED
 
-# module_twin_callback is invoked when the module twin's desired properties are updated.
+# module_twin_callback is invoked when the module twin's desired properties are updated. 
 def module_twin_callback(update_state, payload, user_context):
     global TWIN_CALLBACKS
     print ( "\nTwin callback called with:\nupdateStatus = %s\npayload = %s\ncontext = %s" % (update_state, payload, user_context) )
