@@ -63,8 +63,8 @@
       "properties.desired": {
         "schemaVersion": "1.0",
         "routes": {
-          "RedisEdgeToHub": "FROM /messages/modules/RedisEdge/outputs/* INTO $upstream",
-          "sensorToTestapp": "FROM /messages/modules/tempSensor/outputs/* INTO $upstream"
+          "RedisEdgeToHub": "FROM /messages/modules/redisedge/outputs/* INTO $upstream",
+          "testAppToHub": "FROM /messages/modules/testApp/outputs/* INTO $upstream"
         },
         "storeAndForwardConfiguration": {
           "timeToLiveSecs": 7200
