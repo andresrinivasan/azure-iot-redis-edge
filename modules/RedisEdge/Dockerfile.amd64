@@ -1,26 +1,29 @@
-FROM redis:5.0-rc
+FROM redis:5.0-rc as redis
+
+FROM ubuntu:xenial
+
 
 ## What follows is only what is required to enable the Edge Runtime or 
 ## override what was copied from the Redis image
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends git cmake build-essential curl libcurl4-openssl-dev libssl-dev uuid-dev python-pip libboost-python-dev && \
+    apt-get install -y --no-install-recommends libcurl4-openssl-dev python-pip libboost-python-dev && \
     rm -rf /var/lib/apt/lists/* 
 
-# Workaround `ImportError: libboost_python-py27.so.1.58.0: cannot open shared object file: No such file or directory` by building the SDK
-# ref: https://github.com/Azure/azure-iot-sdk-python/blob/master/doc/python-devbox-setup.md#build-the-azure-iot-hub-sdks-for-python-on-linux
-WORKDIR /dep
-RUN git clone --recursive https://github.com/Azure/azure-iot-sdk-python.git
-RUN cd azure-iot-sdk-python/build_all/linux && \
-    ./build.sh
+# # Workaround `ImportError: libboost_python-py27.so.1.58.0: cannot open shared object file: No such file or directory` by building the SDK
+# # ref: https://github.com/Azure/azure-iot-sdk-python/blob/master/doc/python-devbox-setup.md#build-the-azure-iot-hub-sdks-for-python-on-linux
+# WORKDIR /dep
+# RUN git clone --recursive https://github.com/Azure/azure-iot-sdk-python.git
+# RUN cd azure-iot-sdk-python/build_all/linux && \
+#     ./build.sh
 
 WORKDIR /module
 COPY requirements.txt /module
 RUN pip install -r /module/requirements.txt
 
-WORKDIR /
-RUN cp /dep/azure-iot-sdk-python/device/samples/iothub_client.so /usr/local/lib/python2.7/dist-packages/iothub_client
-RUN rm -rf /dep
+# WORKDIR /
+# RUN cp /dep/azure-iot-sdk-python/device/samples/iothub_client.so /usr/local/lib/python2.7/dist-packages/iothub_client
+# RUN rm -rf /dep
 
 COPY edge-hooks.py /module
 
@@ -29,7 +32,11 @@ USER moduleuser
 
 WORKDIR /data
 
+COPY --from=redis /usr/local/bin/redis-* /usr/local/bin/
+COPY --from=redis /usr/local/bin/gosu /usr/local/bin/
+
 COPY module-entrypoint.sh /usr/local/bin/
+
 ENTRYPOINT ["module-entrypoint.sh"]
 
 CMD ["redis-server"]

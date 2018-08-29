@@ -4,11 +4,12 @@
 
 echo '$@='"$@"
 
-set -ex
+set -e
 
+PYTHONUNBUFFERED=true
 ## Added: Enable the hooks for the Edge runtime
 ## XXX Should this write to a log file?
-python -u /module/edge-hooks.py &
+/module/edge-hooks.py &
 
 # first arg is `-f` or `--some-option`
 # or first arg is `something.conf`
