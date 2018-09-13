@@ -4,7 +4,7 @@
     "image": {
         "repository": "$CONTAINER_REGISTRY_ADDRESS/redisedge",
         "tag": {
-            "version": "0.8",
+            "version": "0.9",
             "platforms": {
                 "amd64": "./Dockerfile.amd64"
             }

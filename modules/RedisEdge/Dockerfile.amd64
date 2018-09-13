@@ -38,5 +38,3 @@ COPY --from=redis /usr/local/bin/gosu /usr/local/bin/
 COPY module-entrypoint.sh /usr/local/bin/
 
 ENTRYPOINT ["module-entrypoint.sh"]
-
-CMD ["redis-server"]
