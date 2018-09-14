@@ -47,8 +47,6 @@ Client.fromEnvironment(Transport, (err, client) => {
       throw e;
     });
 
-    process.stdout.write(`client = ${JSON.stringify(client)}\n`);
-
     // connect to the Edge instance
     client.open((e) => {
       if (e) {

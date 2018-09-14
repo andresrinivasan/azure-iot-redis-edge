@@ -1,6 +1,5 @@
 gnupg 
-git 
-cmake 
-build-essential 
-wget
 ca-certificates
+nodejs
+npm
+tzdata

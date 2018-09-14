@@ -36,17 +36,7 @@
           }
         },
         "modules": {
-          "tempSensor": {
-            "version": "1.0",
-            "type": "docker",
-            "status": "running",
-            "restartPolicy": "always",
-            "settings": {
-              "image": "mcr.microsoft.com/azureiotedge-simulated-temperature-sensor:1.0",
-              "createOptions": ""
-            }
-          },
-          "redis-edge": {
+          "RedisEdge": {
             "version": "1.0",
             "type": "docker",
             "status": "running",
@@ -55,16 +45,6 @@
               "image": "${MODULES.RedisEdge.amd64}",
               "createOptions": ""
             }
-          },
-          "sample-module": {
-            "version": "1.0",
-            "type": "docker",
-            "status": "running",
-            "restartPolicy": "always",
-            "settings": {
-              "image": "${MODULES.SampleModule.amd64}",
-              "createOptions": "{\"ExposedPorts\":{\"9229/tcp\":{}},\"HostConfig\":{\"PortBindings\":{\"9229/tcp\":[{\"HostPort\":\"9229\"}]}}}"
-            }
           }
         }
       }
@@ -72,11 +52,7 @@
     "$edgeHub": {
       "properties.desired": {
         "schemaVersion": "1.0",
-        "routes": {
-          "RedisEdgeToHub": "FROM /messages/modules/redis-edge/outputs/* INTO $upstream",
-          "SampleModuleToIoTHub": "FROM /messages/modules/sample-module/outputs/* INTO $upstream",
-          "sensorToSampleModule": "FROM /messages/modules/tempSensor/outputs/temperatureOutput INTO BrokeredEndpoint(\"/modules/SampleModule/inputs/input1\")"
-        },
+        "routes": {},
         "storeAndForwardConfiguration": {
           "timeToLiveSecs": 7200
         }
