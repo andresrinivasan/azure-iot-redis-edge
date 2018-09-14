@@ -20,7 +20,6 @@ set -e
 # 	exec gosu redis "$0" "$@"
 # fi
 
-redis-server --save "" --port 16739 --daemonize yes
+redis-server --save "" --port 6739 --daemonize yes
 
-PYTHONUNBUFFERED=true
-exec /module/edge-hooks.py
+exec /module/edge-hooks.js

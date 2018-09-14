@@ -36,8 +36,8 @@
           }
         },
         "modules": {
-          "redisedge": {
-            "version": "0.8",
+          "RedisEdge": {
+            "version": "1.0",
             "type": "docker",
             "status": "running",
             "restartPolicy": "always",
@@ -52,10 +52,7 @@
     "$edgeHub": {
       "properties.desired": {
         "schemaVersion": "1.0",
-        "routes": {
-          "RedisEdgeToHub": "FROM /messages/modules/RedisEdge/outputs/* INTO $upstream",
-          "sensorToTestapp": "FROM /messages/modules/tempSensor/outputs/* INTO $upstream"
-        },
+        "routes": {},
         "storeAndForwardConfiguration": {
           "timeToLiveSecs": 7200
         }
