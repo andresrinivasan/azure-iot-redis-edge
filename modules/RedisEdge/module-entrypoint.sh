@@ -20,6 +20,6 @@ set -e
 # 	exec gosu redis "$0" "$@"
 # fi
 
-redis-server --save "" --port 6739 --daemonize yes
+redis-server --save "" --port 6379 --daemonize yes
 
 exec /module/edge-hooks.js
