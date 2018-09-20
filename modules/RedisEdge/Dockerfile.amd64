@@ -1,14 +1,15 @@
 FROM redis:5.0-rc-alpine as redis
-FROM alpine:3.8
+##FROM alpine:3.8
 
-COPY --from=redis /usr/local/bin/redis-* /usr/local/bin/
+##COPY --from=redis /usr/local/bin/redis-* /usr/local/bin/
 
 WORKDIR /dep
-COPY packages.txt /dep
+COPY Dockerfile.amd64.packages.txt /dep
 
+## XXX FIXME Need to cleanup temp files
 RUN apk update && \
-    apk add $(cat packages.txt) && \
-    rm -rf /var/lib/apt/lists/* 
+    apk add $(cat Dockerfile.amd64.packages.txt) 
+
 
 WORKDIR /
 RUN rm -rf /dep
