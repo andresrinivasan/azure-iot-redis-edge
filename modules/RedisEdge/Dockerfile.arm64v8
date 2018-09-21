@@ -1,13 +1,13 @@
-FROM arm32v7/redis:5.0-rc as redis
+FROM arm64v8/redis:5.0-rc as redis
 ##FROM debian:stretch-slim
 
 ##COPY --from=redis /usr/local/bin/redis-* /usr/local/bin/
 
 WORKDIR /dep
-COPY Dockerfile.arm32v7.packages.txt /dep
+COPY Dockerfile.arm64v8.packages.txt /dep
 
 RUN apt-get update && \
-	apt-get install -y --no-install-recommends $(cat Dockerfile.arm32v7.packages.txt)
+	apt-get install -y --no-install-recommends $(cat Dockerfile.arm64v8.packages.txt)
 
 RUN wget -q -O nodesource_setup.sh https://deb.nodesource.com/setup_8.x && \
     bash nodesource_setup.sh

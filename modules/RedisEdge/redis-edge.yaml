@@ -1,0 +1,12 @@
+image: myiotregistery.azurecr.io/redis-edge:0.9.1
+manifests:
+  -
+    image: myiotregistery.azurecr.io/redis-edge:0.9.1-arm32v7
+    platform:
+      architecture: arm
+      os: linux
+  -
+    image: myiotregistery.azurecr.io/redis-edge:0.9.1-amd64
+    platform:
+      architecture: amd64
+      os: linux
