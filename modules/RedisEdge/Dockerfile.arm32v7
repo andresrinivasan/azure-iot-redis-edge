@@ -3,11 +3,13 @@ FROM arm32v7/redis:5.0-rc as redis
 
 ##COPY --from=redis /usr/local/bin/redis-* /usr/local/bin/
 
+ENV OSPACKAGES=arm32v7-packages.txt
+
 WORKDIR /dep
-COPY Dockerfile.arm32v7.packages.txt /dep
+COPY ${OSPACKAGES} /dep
 
 RUN apt-get update && \
-	apt-get install -y --no-install-recommends $(cat Dockerfile.arm32v7.packages.txt)
+	apt-get install -y --no-install-recommends $(cat ${OSPACKAGES})
 
 RUN wget -q -O nodesource_setup.sh https://deb.nodesource.com/setup_8.x && \
     bash nodesource_setup.sh

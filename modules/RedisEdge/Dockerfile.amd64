@@ -3,12 +3,14 @@ FROM redis:5.0-rc-alpine as redis
 
 ##COPY --from=redis /usr/local/bin/redis-* /usr/local/bin/
 
+ENV OSPACKAGES=amd64-packages.txt
+
 WORKDIR /dep
-COPY Dockerfile.amd64.packages.txt /dep
+COPY ${OSPACKAGES} /dep
 
 ## XXX FIXME Need to cleanup temp files
 RUN apk update && \
-    apk add $(cat Dockerfile.amd64.packages.txt) 
+    apk add $(cat ${OSPACKAGES}) 
 
 
 WORKDIR /
