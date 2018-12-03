@@ -1,17 +1,12 @@
-FROM redis:5.0-rc-alpine as redis
-##FROM alpine:3.8
-
-##COPY --from=redis /usr/local/bin/redis-* /usr/local/bin/
+FROM redis:5.0.2-alpine as redis
 
 ENV OSPACKAGES=amd64-packages.txt
 
 WORKDIR /dep
 COPY ${OSPACKAGES} /dep
 
-## XXX FIXME Need to cleanup temp files
-RUN apk update && \
-    apk add $(cat ${OSPACKAGES}) 
-
+RUN apk --no-cache update && \
+    apk --no-cache add $(cat ${OSPACKAGES}) 
 
 WORKDIR /
 RUN rm -rf /dep

@@ -1,4 +1,4 @@
-FROM arm32v7/redis:5.0-rc as redis
+FROM arm32v7/redis:5.0.2 as redis
 ##FROM debian:stretch-slim
 
 ##COPY --from=redis /usr/local/bin/redis-* /usr/local/bin/

@@ -43,7 +43,7 @@
             "restartPolicy": "always",
             "settings": {
               "image": "${MODULES.RedisEdge.amd64}",
-              "createOptions": ""
+              "createOptions": "{\"HostConfig\": { \"PortBindings\": { \"6379/tcp\": [ { \"HostPort\": \"6379\" } ] } } }"
             }
           }
         }
