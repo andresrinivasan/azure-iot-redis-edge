@@ -1,10 +1,11 @@
 FROM redislabs/redistimeseries:latest as redistimeseries
 FROM redisai/redisai:latest as redisai
-FROM redis:5.0.3-alpine as redis
 
+FROM redis:5.0.3-alpine as redis
 
 ENV SRC_LIB_PATH /usr/lib/redis/modules
 ENV DST_LIB_PATH /usr/local/lib/redis/modules
+ENV LD_LIBRARY_PATH ${DST_LIB_PATH}
 
 WORKDIR ${DST_LIB_PATH}
 COPY --from=redistimeseries ${SRC_LIB_PATH}/redistimeseries.so ${DST_LIB_PATH}
@@ -31,6 +32,5 @@ RUN npm install --production
 WORKDIR /data
 
 COPY module-entrypoint.sh /usr/local/bin/
-
 EXPOSE 6379
 ENTRYPOINT ["module-entrypoint.sh"]
