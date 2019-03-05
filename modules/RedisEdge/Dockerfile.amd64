@@ -1,4 +1,16 @@
-FROM redis:5.0.2-alpine as redis
+FROM redislabs/redistimeseries:latest as redistimeseries
+FROM redisai/redisai:latest as redisai
+FROM redis:5.0.3-alpine as redis
+
+
+ENV SRC_LIB_PATH /usr/lib/redis/modules
+ENV DST_LIB_PATH /usr/local/lib/redis/modules
+
+WORKDIR ${DST_LIB_PATH}
+COPY --from=redistimeseries ${SRC_LIB_PATH}/redistimeseries.so ${DST_LIB_PATH}
+COPY --from=redisai ${SRC_LIB_PATH}/redisai.so ${DST_LIB_PATH}
+COPY --from=redisai ${SRC_LIB_PATH}/libtensorflow.so ${DST_LIB_PATH}
+COPY --from=redisai ${SRC_LIB_PATH}/libtensorflow_framework.so ${DST_LIB_PATH}
 
 ENV OSPACKAGES=amd64-packages.txt
 
