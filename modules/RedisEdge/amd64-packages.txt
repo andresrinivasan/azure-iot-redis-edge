@@ -1,5 +1,4 @@
+wget
 gnupg 
 ca-certificates
-nodejs
-npm
 tzdata
