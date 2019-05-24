@@ -1,6 +1,6 @@
 # azure-iot-redis-edge
 
-NOTE: This repo is deprecated. Please see RedisEdge for Azure IoT Edge.
+> **NOTE**: This repo is deprecated. Please see RedisEdge for Azure IoT Edge.
 
 In Azure IoT Edge speak, this is a solution that consists of a single module: the RedisEdge module.
 
